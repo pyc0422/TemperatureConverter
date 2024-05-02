@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fahrenheit to Celsius Converter</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+          .nav-a {
+            @apply text-black hover:underline hover:opacity-80 capitalize font-semibold text-lg
+          }
+          label{
+            @apply text-black text-sm font-semibold
+          }
+          input{
+            @apply text-black text-sm font-normal border rounded-md p-1
+          }
+          .cal-div{
+            @apply flex flex-col m-2 p-4
+          }
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            var form = document.getElementById('cal-form')
+            form.addEventListener("submit", (e) => {
+                e.preventDefault()
+                onConvertBtnClick()
+            })
+            form.addEventListener("reset", (e) => {
+                document.getElementById('fahrenheit').value = ''
+                document.querySelector('div.cal-div div').innerText = ''
+            })
+        }
+        function onConvertBtnClick(){
+            let fahrenheit = Number(document.getElementById('fahrenheit').value);
+            let celsius = (fahrenheit - 32) * 5/9
+            document.querySelector('div.cal-div div').innerText = celsius.toFixed(2).toString()
+        }
+    </script>
+</head>
+<body>
+    <nav class="bg-white bg-opacity-50 w-screen fixed top-0 h-20 shadow-md px-10 py-2 flex items-start jusitfy-start">
+        <div class="flex justify-center items-start m-2 p-4 gap-5">
+            <a href="FtoC.html" class="nav-a">to Celsius</a>
+            <a href="CtoF.html" class="nav-a">to Fahrenheit</a>
+            <a href="index.html" class="nav-a">Home</a>
+        </div>
+    </nav>
+    <div class="mt-24 flex flex-col justify-center items-center">
+        <form class="flex justify-center items-center gap-5" id="cal-form">
+            <div class="cal-div">
+                <label for="fahrenheit">Fahrenheit:</label>
+                <input type="text" id="fahrenheit" name="fahrenheit" pattern="^[0-9]+$" minlength="1" maxlength="10" required>
+            </div>
+            <button type="submit" class="border rounded-md px-6 py-1 font-semibold bg-gray-600 text-white hover:text-black hover:bg-gray-400 ">Convert</button>
+            <div class="cal-div">
+                <label>Celsius:</label>
+                <div class="text-black text-sm font-normalp-1 h-8"></div>
+            </div>
+            <button type="reset" class="border rounded-md px-6 py-1 font-semibold hover:bg-gray-600 hover:text-white text-black bg-gray-400">Reset</button>
+        </form>
+    </div>  
+</body>
+</html>
